@@ -1,0 +1,39 @@
+{
+  "name": "vite-plugin-relay-lite",
+  "version": "0.1.0",
+  "description": "Vite plugin for more convenient Relay experience",
+  "source": "./src/plugin.ts",
+  "main": "./lib/plugin.js",
+  "types": "./lib/plugin.d.ts",
+  "exports": {
+    "require": "./lib/plugin.js",
+    "import": "./lib/plugin.mjs"
+  },
+  "scripts": {
+    "prepack": "yarn build",
+    "build": "nanobundle build --minify=false"
+  },
+  "files": [
+    "src",
+    "lib"
+  ],
+  "peerDependencies": {
+    "graphql": "^15.0.0 || ^16.0.0",
+    "vite": "^2.0.0"
+  },
+  "dependencies": {
+    "cosmiconfig": "^7.0.1",
+    "kleur": "^4.1.5"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.3",
+    "graphql": "^16.5.0",
+    "nanobundle": "^0.0.28",
+    "typescript": "^4.7.4",
+    "vite": "^2.9.14"
+  },
+  "packageManager": "yarn@3.2.1",
+  "engines": {
+    "node": ">= 14.0.0"
+  }
+}
