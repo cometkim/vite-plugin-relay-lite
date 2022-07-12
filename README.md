@@ -19,7 +19,7 @@ yarn add vite-plugin-relay-lite vite graphql
 // vite.config.ts
 
 import { defineConfig, loadEnv } from 'vite';
-import relay from '@karrotmarket/vite-plugin-relay';
+import relay from 'vite-plugin-relay-lite';
 
 export default defineConfig(() => {
   return {
@@ -42,8 +42,8 @@ You can use custom config file path.
 {
   plugins: [
     relay({
-      relayConfig: 'path/to/relay.js',
-    });
+      relayConfig: 'path/to/relay.js'
+    })
   ]
 }
 ```
@@ -56,8 +56,8 @@ Or pass config object.
     relay({
       relayConfig: {
         // ...relay config
-      },
-    });
+      }
+    })
   ]
 }
 ```
