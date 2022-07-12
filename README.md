@@ -12,7 +12,9 @@ With only minimum configuration!
 ## Installation
 
 ```bash
-yarn add vite-plugin-relay-lite vite graphql
+yarn add -D vite vite-plugin-relay-lite
+
+yarn add graphql # peer dependency
 ```
 
 ```ts
