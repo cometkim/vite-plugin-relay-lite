@@ -12,24 +12,24 @@ With only minimum configuration!
 ## Installation
 
 ```bash
-yarn add -D vite vite-plugin-relay-lite
+yarn add -D vite graphql vite-plugin-relay-lite
 
-yarn add graphql # peer dependency
+# Assumes the project already have relay-compiler and configuration
 ```
 
 ```ts
 // vite.config.ts
 
-import { defineConfig, loadEnv } from 'vite';
+import { type UserConfig } from 'vite';
 import relay from 'vite-plugin-relay-lite';
 
-export default defineConfig(() => {
-  return {
-    plugins: [
-      relay(),
-    ],
-  };
-});
+const config: UserConfig = {
+  plugins: [
+    relay(),
+  ],
+};
+
+export default config;
 ```
 
 ## Customize Options
@@ -69,6 +69,24 @@ Or pass config object.
 Plugin respects the `eagerEsModules` option in the Relay config, so the default output format is `commonjs`.
 
 However, using CommonJS in Vite projects may require additional config to transpile, and it's not recommended to use. Consider to set `eagerEsModules` to `true` in your Relay config, or set `module: 'esmodule'` in plugin options as you require.
+
+### Relay Compiler Integration
+
+Plugin automatically runs `relay-compiler` before transform, so it should be installed in the project.
+
+Or you can set the `codegen` option to `false` to disable it.
+
+```js
+{
+  plugins: [
+    relay({
+      codegen: false
+    })
+  ]
+}
+```
+
+Plugin respects the `codegenCommand` option in the Relay config, it uses `relay-compiler` if not set.
 
 ## Acknowledgements
 
