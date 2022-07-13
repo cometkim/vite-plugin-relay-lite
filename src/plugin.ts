@@ -64,7 +64,7 @@ export default function makePlugin(config: Config = {}): Plugin {
     name: 'vite-plugin-relay-lite',
     enforce: 'pre',
     async configResolved({ build, command, mode }) {
-      if (!config.codegen) {
+      if (config.codegen === false) {
         return;
       }
 
