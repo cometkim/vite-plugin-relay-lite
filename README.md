@@ -1,4 +1,4 @@
-# vite-plugin-relay
+# vite-plugin-relay-lite
 
 Vite plugin for more convenient Relay experience.
 
@@ -14,7 +14,7 @@ With only minimum configuration!
 ```bash
 yarn add -D vite graphql vite-plugin-relay-lite
 
-# Assumes the project already have relay-compiler and configuration
+# Assumes the project already have relay-compiler and its configuration
 ```
 
 ```ts
