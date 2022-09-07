@@ -46,7 +46,7 @@ export default function makePlugin(config: Config = {}): Plugin {
     }
   }
 
-  const sourceDirectory = path.resolve(cwd, (relayConfig['src'] as string) || './src');
+  const sourceDirectory = path.resolve(cwd, (relayConfig['src'] as string) || './src').split(path.sep).join(path.posix.sep);
   const artifactDirectory = relayConfig['artifactDirectory'];
   const codegenCommand = (relayConfig['codegenCommand'] as string) || 'relay-compiler';
   const module = config.module || (relayConfig['eagerEsModules'] ? 'esmodule' : 'commonjs');
