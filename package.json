@@ -19,7 +19,7 @@
   ],
   "peerDependencies": {
     "graphql": "^15.0.0 || ^16.0.0",
-    "vite": "^2.0.0"
+    "vite": "^2.0.0 || ^3.0.0"
   },
   "dependencies": {
     "cosmiconfig": "^7.0.1",
