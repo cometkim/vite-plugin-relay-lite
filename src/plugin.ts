@@ -49,13 +49,13 @@ export default function makePlugin(config: Config = {}): Plugin {
   const sourceDirectory = path.resolve(cwd, (relayConfig['src'] as string) || './src').split(path.sep).join(path.posix.sep);
   const artifactDirectory = relayConfig['artifactDirectory'];
   const codegenCommand = (relayConfig['codegenCommand'] as string) || 'relay-compiler';
-  const module = config.module || (relayConfig['eagerEsModules'] ? 'esmodule' : 'commonjs');
+  const module = config.module || (relayConfig['eagerESModules'] ? 'esmodule' : 'commonjs');
 
   if (module !== 'esmodule') {
     console.warn(
       kleur.yellow(
         'Using CommonJS may not works.\n' +
-        'Consider to set `eagerEsModules` to `true` in your Relay config',
+        'Consider to set `eagerESModules` to `true` in your Relay config',
       ),
     );
   }
