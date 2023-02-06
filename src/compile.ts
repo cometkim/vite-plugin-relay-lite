@@ -1,6 +1,7 @@
+import * as crypto from 'node:crypto';
+import * as path from 'node:path';
+
 import { print, parse, Kind } from 'graphql';
-import * as crypto from 'crypto';
-import * as path from 'path';
 
 export type CompileOptions = {
   module: 'esmodule' | 'commonjs';

@@ -1,4 +1,5 @@
-import * as path from 'path';
+import * as path from 'node:path';
+
 import kleur from 'kleur';
 import { type Plugin } from 'vite';
 import { cosmiconfigSync, defaultLoaders } from 'cosmiconfig';
