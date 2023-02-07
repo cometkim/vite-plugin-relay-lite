@@ -17,7 +17,11 @@ export function compile(
 ): string {
   const imports: string[] = [];
 
-  content = content.replace(/graphql`([\s\S]*?)`/gm, (_match, query) => {
+  content = content.replace(/graphql`([\s\S]*?)`/gm, (match, query) => {
+    if (match.includes('//')) {
+      return match;
+    }
+
     const ast = parse(query);
 
     if (ast.definitions.length === 0) {
