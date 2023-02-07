@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-relay-lite",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Vite plugin for more convenient Relay experience",
   "main": "./lib/plugin.js",
   "types": "./lib/plugin.d.ts",
