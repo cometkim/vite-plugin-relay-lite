@@ -27,7 +27,12 @@ export async function launchProcess(options: Options): Promise<void> {
     const prefix = kleur.green(`[${cmd}]`);
     const output = chunk.toString().trimEnd();
     console.log(prefix, output);
-    if (options.watch && output.includes('Compilation completed.')) {
+
+    const watchingMessages = [
+      'Compilation completed',
+      'Watching for changes to graphql',
+    ];
+    if (options.watch && watchingMessages.some(message => output.includes(message))) {
       compileOnce(true);
     }
   });
