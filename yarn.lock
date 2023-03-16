@@ -1516,8 +1516,8 @@ __metadata:
   linkType: hard
 
 "nanobundle@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "nanobundle@npm:1.4.0"
+  version: 1.5.1
+  resolution: "nanobundle@npm:1.5.1"
   dependencies:
     "@cometjs/core": ^2.1.0
     browserslist: ^4.21.4
@@ -1536,7 +1536,7 @@ __metadata:
       optional: true
   bin:
     nanobundle: bin.min.mjs
-  checksum: f8576471c0dac2cfa88f08e09506586e5179aa2f24dbe74c8fc4db0b37f3557386cc5ecdc2ed7405e9389f70a2807927b415fb4e897ac85077edb9b9ec0f4370
+  checksum: 4238ba2a776d0cb70e6b0a432f9958535d9f1619928d5c52dc19c3c4c57bdd062ae87a338a0aa5d8e2bafb1dba31130c67d1e5aefda2122b97fcffc7212626a5
   languageName: node
   linkType: hard
 
