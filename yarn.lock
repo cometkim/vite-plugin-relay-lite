@@ -657,14 +657,14 @@ __metadata:
   linkType: hard
 
 "cosmiconfig@npm:^8.0.0":
-  version: 8.1.1
-  resolution: "cosmiconfig@npm:8.1.1"
+  version: 8.1.2
+  resolution: "cosmiconfig@npm:8.1.2"
   dependencies:
     import-fresh: ^3.2.1
     js-yaml: ^4.1.0
     parse-json: ^5.0.0
     path-type: ^4.0.0
-  checksum: 6a70c6fe2269475d887e1b11bdcaef41f3039903eaf8987dee815115b65723e495a7dcf19edda2d365b5a795e413e3115e0340639e9b264edf064bc5cf7e4a65
+  checksum: 5d02637d19f488b48074b9a2993a7eec0d88d8fd750fcba0e3e647aa88ad557e53890b899ac0370248512abde29fe7f873d4747e80cf4d2b3df462ab77d53f90
   languageName: node
   linkType: hard
 
