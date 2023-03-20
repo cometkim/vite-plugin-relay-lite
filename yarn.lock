@@ -519,7 +519,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:^4.21.4":
+"browserslist@npm:^4.21.5":
   version: 4.21.5
   resolution: "browserslist@npm:4.21.5"
   dependencies:
@@ -1516,27 +1516,27 @@ __metadata:
   linkType: hard
 
 "nanobundle@npm:^1.4.0":
-  version: 1.5.1
-  resolution: "nanobundle@npm:1.5.1"
+  version: 1.6.0
+  resolution: "nanobundle@npm:1.6.0"
   dependencies:
     "@cometjs/core": ^2.1.0
-    browserslist: ^4.21.4
+    browserslist: ^4.21.5
     esbuild: ^0.17.3
     kleur: ^4.1.5
     meow: ^11.0.0
     pretty-bytes: ^6.0.0
     semver: ^7.3.8
     string-dedent: ^3.0.1
-    tsconfck: ^2.0.2
+    tsconfck: ^2.1.0
     xstate: ^4.35.0
   peerDependencies:
-    typescript: ^3.7.0 || ^4.0.0
+    typescript: ^3.7.0 || ^4.0.0 || ^5.0.0
   peerDependenciesMeta:
     typescript:
       optional: true
   bin:
     nanobundle: bin.min.mjs
-  checksum: 4238ba2a776d0cb70e6b0a432f9958535d9f1619928d5c52dc19c3c4c57bdd062ae87a338a0aa5d8e2bafb1dba31130c67d1e5aefda2122b97fcffc7212626a5
+  checksum: 017f2de7804a1b14523bcac107615a74491d5436f1a4ee1d25706b0b458bf20caafe48df12bd668f59277a3de98f48d1dee57ad52c8b6331a6b70550d0e1f8b6
   languageName: node
   linkType: hard
 
@@ -2083,7 +2083,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsconfck@npm:^2.0.1, tsconfck@npm:^2.0.2":
+"tsconfck@npm:^2.0.1":
   version: 2.0.2
   resolution: "tsconfck@npm:2.0.2"
   peerDependencies:
@@ -2094,6 +2094,20 @@ __metadata:
   bin:
     tsconfck: bin/tsconfck.js
   checksum: bc914042b2f5e1f9d7bbadd05b74031f32e2f1757061743d70d86d17dda0734d838e67abb0105b81db67c30b66496e5d408cbe216bb43b3d567a181b0448ddc1
+  languageName: node
+  linkType: hard
+
+"tsconfck@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "tsconfck@npm:2.1.0"
+  peerDependencies:
+    typescript: ^4.3.5 || ^5.0.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  bin:
+    tsconfck: bin/tsconfck.js
+  checksum: e40e9dce2438fd2b0cf9f27732046028cea34e4e29e28b5de49815d723e46a0d1ac175d3a520e3fc140cb0b70b5fb61fdbfdf849df8f693288e744386c317f11
   languageName: node
   linkType: hard
 
