@@ -105,7 +105,10 @@ export default function makePlugin(config: Config = {}): Plugin {
         ...typeof artifactDirectory === 'string' && { artifactDirectory },
       });
 
-      return { code };
+      return {
+        code,
+        map: null, // FIXME: #3 we need to generate a real sourcemap
+      };
     },
   };
 }
