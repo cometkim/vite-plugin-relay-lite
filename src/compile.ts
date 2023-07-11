@@ -1,5 +1,6 @@
 import * as crypto from 'node:crypto';
 import * as path from 'node:path';
+import MagicString from 'magic-string'
 
 import { print, parse, Kind } from 'graphql';
 
@@ -12,11 +13,10 @@ export type CompileOptions = {
 
 export function compile(
   file: string,
-  content: string,
+  content: MagicString,
   options: CompileOptions,
-): string {
+): MagicString {
   const imports: string[] = [];
-
   content = content.replace(/graphql`([\s\S]*?)`/gm, (match, query) => {
     if (match.includes('//')) {
       return match;
@@ -35,9 +35,9 @@ export function compile(
     ) {
       throw new Error(
         'Expected a fragment, mutation, query, or ' +
-          'subscription, got `' +
-          definition.kind +
-          '`.',
+        'subscription, got `' +
+        definition.kind +
+        '`.',
       );
     }
 
@@ -91,7 +91,9 @@ export function compile(
     return result;
   });
 
-  return [...imports, content].join('\n');
+  content = content.prepend(imports.join('\n'));
+
+  return content;
 }
 
 function getErrorMessage(name: string, codegenCommand: string) {
