@@ -1,13 +1,15 @@
 # vite-plugin-relay-lite
 
-Vite plugin for more convenient Relay experience.
+[![Version on NPM](https://img.shields.io/npm/v/vite-plugin-relay-lite)](https://www.npmjs.com/package/vite-plugin-relay-lite)
+[![Downlaods on NPM](https://img.shields.io/npm/dm/vite-plugin-relay-lite)](https://www.npmjs.com/package/vite-plugin-relay-lite)
+[![LICENSE - MIT](https://img.shields.io/github/license/cometkim/vite-plugin-relay-lite)](#license)
+
+Vite plugin for more convenient Relay experience. **With no Babel dependencies!**
 
 What this plugin does for you:
 - Generates artifacts on code changes
 - Transform codes without Babel plugin
 - Respects project's Relay config file
-
-With only minimum configuration!
 
 ## Installation
 
