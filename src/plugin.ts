@@ -97,15 +97,14 @@ export default function makePlugin(config: Config = {}): Plugin {
 
       // avoid pre-compilation
       const env = process.env;
-
-      const code = compile(id, src, {
+      const result = compile(id, src, {
         module,
         codegenCommand,
         isDevelopment: env.NODE_ENV !== 'production',
         ...typeof artifactDirectory === 'string' && { artifactDirectory },
       });
 
-      return { code };
+      return result;
     },
   };
 }
