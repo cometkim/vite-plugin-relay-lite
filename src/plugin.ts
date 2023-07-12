@@ -3,7 +3,6 @@ import * as path from 'node:path';
 import kleur from 'kleur';
 import { type Plugin } from 'vite';
 import { cosmiconfigSync, defaultLoaders } from 'cosmiconfig';
-import MagicString from 'magic-string'
 
 import { compile } from './compile';
 import { launchProcess } from './codegen';
@@ -98,18 +97,14 @@ export default function makePlugin(config: Config = {}): Plugin {
 
       // avoid pre-compilation
       const env = process.env;
-      const source = new MagicString(src)
-      const code = compile(id, source, {
+      const result = compile(id, src, {
         module,
         codegenCommand,
         isDevelopment: env.NODE_ENV !== 'production',
         ...typeof artifactDirectory === 'string' && { artifactDirectory },
       });
 
-      return {
-        code: code.toString(),
-        map: code.generateMap({ hires: true }),
-      };
+      return result;
     },
   };
 }
