@@ -33,7 +33,7 @@
     "typescript": "^5.0.0",
     "vite": "^4.1.1"
   },
-  "packageManager": "yarn@4.0.1",
+  "packageManager": "yarn@4.0.2",
   "engines": {
     "node": ">= 14.0.0"
   }
