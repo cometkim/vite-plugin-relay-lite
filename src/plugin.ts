@@ -4,8 +4,8 @@ import kleur from 'kleur';
 import { type Plugin } from 'vite';
 import { cosmiconfigSync, defaultLoaders } from 'cosmiconfig';
 
-import { compile } from './compile';
-import { launchProcess } from './codegen';
+import { compile } from './compile.ts';
+import { launchProcess } from './codegen.ts';
 
 type AnyObject = Record<string, unknown>;
 
