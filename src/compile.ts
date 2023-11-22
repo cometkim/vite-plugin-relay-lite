@@ -98,7 +98,9 @@ export function compile(
     return prefix + result;
   });
 
-  content.prepend(imports.join('\n'));
+  content.prepend(
+    [...imports, ''].join('\n'),
+  );
 
   return {
     code: content.toString(),
