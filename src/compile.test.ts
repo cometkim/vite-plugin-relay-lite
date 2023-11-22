@@ -138,3 +138,47 @@ test.each([
 
   expect(result.code).toEqual(source);
 });
+
+test('comments', () => {
+  const basePath = '/project';
+  const id = '__MODULE__';
+
+  const source = dedent`
+    const query1 = graphql\`
+      query Test {
+        # This should be compiled
+        __typename
+      }
+    \`;
+
+    // This shouldn't be compiled
+    // const query2 = graphql\`
+    //   query Test {
+    //     __typename
+    //   }
+    // \`;
+  `;
+
+  const result = compile(
+    path.join(basePath, id),
+    source,
+    {
+      module: 'commonjs',
+      isDevelopment: false,
+      codegenCommand: 'codegen',
+    },
+  );
+
+  expect(result.code).toEqual(dedent`
+    const query1 = require("./__generated__/Test.graphql");
+
+    // This shouldn't be compiled
+    // const query2 = graphql\`
+    //   query Test {
+    //     __typename
+    //   }
+    // \`;
+  `);
+});
+
+
