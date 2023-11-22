@@ -109,3 +109,26 @@ test('compile esmodule in-development', () => {
 
   expect(result.code).toMatchInlineSnapshot('"import graphql__f4ce3be5b8e81a99157cd3e378f936b6 from \\"./__generated__/Test.graphql\\";const query = (graphql__f4ce3be5b8e81a99157cd3e378f936b6.hash && graphql__f4ce3be5b8e81a99157cd3e378f936b6.hash !== \\"f4ce3be5b8e81a99157cd3e378f936b6\\" && console.error(\\"The definition of \'Test\' appears to have changed. Run `codegen` to update the generated files to receive the expected data.\\"), graphql__f4ce3be5b8e81a99157cd3e378f936b6);"');
 });
+
+test.each([
+  dedent`
+    const host = \`\${server}/graphql\`
+
+    const otherTemplate = \`foo\`
+  `,
+])('false positive test', source => {
+  const basePath = '/project';
+  const id = '__MODULE__';
+
+  const result = compile(
+    path.join(basePath, id),
+    source,
+    {
+      module: 'esmodule',
+      isDevelopment: false,
+      codegenCommand: 'codegen',
+    },
+  );
+
+  expect(result.code).toEqual(source);
+});
