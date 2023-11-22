@@ -54,7 +54,7 @@ test('compile commonjs in-development', () => {
   );
 
   expect(result.code).toMatchInlineSnapshot(
-    '"const query = graphql__f4ce3be5b8e81a99157cd3e378f936b6 !== void 0 ? graphql__f4ce3be5b8e81a99157cd3e378f936b6 : (graphql__f4ce3be5b8e81a99157cd3e378f936b6 = require(\\"./__generated__/Test.graphql\\"), graphql__f4ce3be5b8e81a99157cd3e378f936b6.hash && graphql__f4ce3be5b8e81a99157cd3e378f936b6.hash !== \\"f4ce3be5b8e81a99157cd3e378f936b6\\" && console.error(\\"The definition of \'Test\' appears to have changed. Run `codegen` to update the generated files to receive the expected data.\\"), graphql__f4ce3be5b8e81a99157cd3e378f936b6);"',
+    '"const query = typeof graphql__f4ce3be5b8e81a99157cd3e378f936b6 === \\"object\\" ? graphql__f4ce3be5b8e81a99157cd3e378f936b6 : (graphql__f4ce3be5b8e81a99157cd3e378f936b6 = require(\\"./__generated__/Test.graphql\\"), graphql__f4ce3be5b8e81a99157cd3e378f936b6.hash && graphql__f4ce3be5b8e81a99157cd3e378f936b6.hash !== \\"f4ce3be5b8e81a99157cd3e378f936b6\\" && console.error(\\"The definition of \'Test\' appears to have changed. Run `codegen` to update the generated files to receive the expected data.\\"), graphql__f4ce3be5b8e81a99157cd3e378f936b6);"',
   );
 });
 

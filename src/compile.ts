@@ -88,7 +88,7 @@ export function compile(
         }
         case 'commonjs': {
           result =
-            `${id} !== void 0 ? ${id} : (${id} = ${result}, ${id}.hash && ` +
+            `typeof ${id} === "object" ? ${id} : (${id} = ${result}, ${id}.hash && ` +
             `${id}.hash !== "${hash}" && console.error("${error}"), ${id})`;
           break;
         }
