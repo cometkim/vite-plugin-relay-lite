@@ -9,6 +9,21 @@
     "require": "./lib/plugin.js",
     "import": "./lib/plugin.mjs"
   },
+  "repository": "git://github.com/cometkim/vite-plugin-relay-lite.git",
+  "homepage": "https://github.com/cometkim/vite-plugin-relay-lite",
+  "bugs": {
+    "url": "https://github.com/cometkim/vite-plugin-relay-lite/issues"
+  },
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "relay"
+  ],
+  "tags": [
+    "vite",
+    "vite-plugin",
+    "relay"
+  ],
   "scripts": {
     "prepack": "yarn build --clean",
     "build": "nanobundle build"
