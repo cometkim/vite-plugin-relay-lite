@@ -34,7 +34,7 @@
     "nanobundle": "^1.4.0",
     "typescript": "^5.0.0",
     "vite": "^5.0.0",
-    "vitest": "^0.34.6"
+    "vitest": "^1.0.0"
   },
   "packageManager": "yarn@4.1.1",
   "engines": {
