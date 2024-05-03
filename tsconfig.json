@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "ESNext",
-    "strict": true,
-    "moduleResolution": "Bundler",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "allowImportingTsExtensions": true,
     "allowSyntheticDefaultImports": true,
+    "strict": true,
     "noEmit": true,
     "rootDir": "src",
     "outDir": "lib"

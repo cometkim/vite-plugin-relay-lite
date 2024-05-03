@@ -19,12 +19,13 @@
     "vite-plugin",
     "relay"
   ],
+  "type": "module",
   "main": "./lib/plugin.js",
   "types": "./lib/plugin.d.ts",
   "exports": {
     "types": "./lib/plugin.d.ts",
-    "require": "./lib/plugin.js",
-    "import": "./lib/plugin.mjs"
+    "import": "./lib/plugin.js",
+    "require": "./lib/plugin.cjs"
   },
   "scripts": {
     "prepack": "yarn build --clean",
@@ -33,6 +34,7 @@
   },
   "files": [
     "src",
+    "!src/*.test.ts",
     "lib"
   ],
   "peerDependencies": {
