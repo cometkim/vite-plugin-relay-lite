@@ -2,8 +2,9 @@ import { type ASTNode, visit } from 'graphql';
 
 /**
  * Vendored GraphQL printer
+ * Fork from https://github.com/graphql/graphql-js/blob/v15.3.0/src/language/printer.js
  *
- * This ensure compatibility with generated hash by the Relay compiler.
+ * This ensure compatibility with generated document hash by the Relay compiler.
  * graphql-js' printer is incompatible with Relay's one since v15.4
  *
  * Later Relay team should provide a policy to deal with it.
@@ -15,7 +16,7 @@ export function print(ast: ASTNode): string {
   return visit<string>(ast, {
     Name: { leave: node => node.value },
     Variable: { leave: node => '$' + node.name },
-    Document: { leave: node => join(node.definitions, '\n\n') },
+    Document: { leave: node => join(node.definitions, '\n\n') + '\n' },
     OperationDefinition: {
       leave(node) {
         const varDefs = wrap('(', join(node.variableDefinitions, ', '), ')');
@@ -27,7 +28,6 @@ export function print(ast: ASTNode): string {
           ],
           ' ',
         );
-
         // Anonymous queries with no directives or variable definitions can use
         // the query short form.
         return (prefix === 'query' ? '' : prefix + ' ') + node.selectionSet;
