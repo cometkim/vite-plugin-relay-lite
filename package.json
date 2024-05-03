@@ -33,6 +33,7 @@
     "@types/node": "^20.0.0",
     "common-tags": "^1.8.2",
     "graphql": "^16.6.0",
+    "graphql-15": "npm:graphql@15.0.0",
     "nanobundle": "^2.0.0",
     "typescript": "^5.0.0",
     "vite": "^5.2.10",
