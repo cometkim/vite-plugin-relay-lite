@@ -30,16 +30,14 @@ yarn add -D vite graphql vite-plugin-relay-lite
 ```ts
 // vite.config.ts
 
-import { type UserConfig } from 'vite';
+import { defineConfig } from 'vite';
 import relay from 'vite-plugin-relay-lite';
 
-const config: UserConfig = {
+export default defineConfig({
   plugins: [
     relay(),
   ],
-};
-
-export default config;
+});
 ```
 
 ## Customize Options
