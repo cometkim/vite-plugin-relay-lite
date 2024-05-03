@@ -265,3 +265,47 @@ test('https://github.com/facebook/relay/issues/4226', () => {
     );"
   `);
 });
+
+test('https://github.com/cometkim/vite-plugin-relay-lite/issues/72', () => {
+  const basePath = '/project';
+  const id = '__MODULE__';
+
+  const source = dedent`
+    const result = useFragment(
+      tagOrHashtag.__typename === 'Tag' ? graphql\`
+        fragment SearchResult_Tag on Tag {
+          facet {
+            name
+          }
+          name
+          id
+        }
+      \` : graphql\`
+        fragment SearchResult_Hashtag on Hashtag {
+          name
+          id
+        }
+      \`,
+      tagOrHashtag,
+    );
+  `;
+
+  const result = compile(
+    path.join(basePath, id),
+    source,
+    {
+      module: 'esmodule',
+      isDevelopment: false,
+      codegenCommand: 'codegen',
+    },
+  );
+
+  expect(result.code).toMatchInlineSnapshot(`
+    "import graphql__dfaca053239e85e3436a93e14ce47e06 from "./__generated__/SearchResult_Tag.graphql";
+    import graphql__07216d96dd965b1cda8ea0c1df38fb2b from "./__generated__/SearchResult_Hashtag.graphql";
+    const result = useFragment(
+      tagOrHashtag.__typename === 'Tag' ? graphql__dfaca053239e85e3436a93e14ce47e06 : graphql__07216d96dd965b1cda8ea0c1df38fb2b,
+      tagOrHashtag,
+    );"
+  `);
+});
