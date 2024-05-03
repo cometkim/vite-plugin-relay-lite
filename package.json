@@ -2,15 +2,11 @@
   "name": "vite-plugin-relay-lite",
   "version": "0.6.0",
   "description": "Vite plugin for more convenient Relay experience",
-  "main": "./lib/plugin.js",
-  "types": "./lib/plugin.d.ts",
-  "exports": {
-    "types": "./lib/plugin.d.ts",
-    "require": "./lib/plugin.js",
-    "import": "./lib/plugin.mjs"
-  },
-  "repository": "git://github.com/cometkim/vite-plugin-relay-lite.git",
   "homepage": "https://github.com/cometkim/vite-plugin-relay-lite",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cometkim/vite-plugin-relay-lite.git"
+  },
   "bugs": {
     "url": "https://github.com/cometkim/vite-plugin-relay-lite/issues"
   },
@@ -19,11 +15,13 @@
     "vite-plugin",
     "relay"
   ],
-  "tags": [
-    "vite",
-    "vite-plugin",
-    "relay"
-  ],
+  "main": "./lib/plugin.js",
+  "types": "./lib/plugin.d.ts",
+  "exports": {
+    "types": "./lib/plugin.d.ts",
+    "require": "./lib/plugin.js",
+    "import": "./lib/plugin.mjs"
+  },
   "scripts": {
     "prepack": "yarn build --clean",
     "build": "nanobundle build"
