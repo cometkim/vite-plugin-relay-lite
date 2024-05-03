@@ -16,15 +16,17 @@ type Config = {
 };
 
 const configExplorer = cosmiconfigSync('relay', {
+  searchStrategy: 'none',
   searchPlaces: [
     'relay.config.js',
     'relay.config.json',
+    '.config/relay.config.js',
+    '.config/relay.config.json',
     'package.json',
   ],
   loaders: {
     '.json': defaultLoaders['.json'],
     '.js': defaultLoaders['.js'],
-    noExt: defaultLoaders['.yaml'],
   },
 });
 
@@ -32,6 +34,7 @@ export default function makePlugin(config: Config = {}): Plugin {
   const cwd = process.cwd();
 
   let relayConfig: AnyObject = {};
+  let relayConfigPath: string | null = null;
   if (config.relayConfig && typeof config.relayConfig === 'object') {
     relayConfig = config.relayConfig;
   } else {
@@ -41,6 +44,7 @@ export default function makePlugin(config: Config = {}): Plugin {
         : configExplorer.search(cwd);
       if (result) {
         relayConfig = result.config;
+        relayConfigPath = result.filepath;
       }
     } catch (_err) {
       // config not found
@@ -74,6 +78,7 @@ export default function makePlugin(config: Config = {}): Plugin {
       if (willGenerate) {
         await launchProcess({
           codegenCommand,
+          relayConfigPath,
           watch,
         });
       }

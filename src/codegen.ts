@@ -3,6 +3,7 @@ import kleur from 'kleur';
 
 type Options = {
   codegenCommand: string,
+  relayConfigPath: string | null,
   watch: boolean,
 };
 
@@ -12,6 +13,10 @@ export async function launchProcess(options: Options): Promise<void> {
 
   if (options.watch) {
     args.push('--watch');
+  }
+
+  if (options.relayConfigPath) {
+    args.push(options.relayConfigPath);
   }
 
   const child = spawn(cmd, args, {
