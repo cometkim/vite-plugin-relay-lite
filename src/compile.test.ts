@@ -181,4 +181,87 @@ test('comments', () => {
   `);
 });
 
+test('https://github.com/cometkim/vite-plugin-relay-lite/issues/53', () => {
+  const basePath = '/project';
+  const id = '__MODULE__';
 
+  const source = dedent`
+const query = graphql\`
+	query MentionSelectQuery {
+		me {
+			mention(
+				query: ""
+				storyId: ""
+				groups: false
+				users: false
+				teams: false
+				exclude: []
+			) {
+				__typename
+			}
+		}
+	}
+\``;
+
+  const result = compile(
+    path.join(basePath, id),
+    source,
+    {
+      module: 'esmodule',
+      isDevelopment: false,
+      codegenCommand: 'codegen',
+    },
+  );
+
+  expect(result.code).toMatchInlineSnapshot(`
+    "import graphql__3742279b5e660168bd0c416c594e14c7 from "./__generated__/MentionSelectQuery.graphql";
+    const query = graphql__3742279b5e660168bd0c416c594e14c7"
+  `);
+});
+
+test('https://github.com/facebook/relay/issues/4226', () => {
+  const basePath = '/project';
+  const id = '__MODULE__';
+
+  const source = dedent`
+    const data = useFragment(
+      graphql\`
+        fragment SellingProductListFragmentContainer_store_representActiveProducts on Store
+          @argumentDefinitions(
+            count: { type: "Int", defaultValue: 10 }
+            cursor: { type: "ID" }
+            filter: { type: "ProductFilter", defaultValue: { statuses: [ACTIVE], representStatus: ACTIVE } }
+          )
+          @refetchable(queryName: "SellingProductListFragmentContatinerRepresentActiveProducts") {
+            representActiveProducts: products(first: $count, after: $cursor, filter: $filter)
+              @connection(key: "SellingProductListFragmentContainer_store_representActiveProducts") {
+              edges {
+                node {
+                  _id
+                }
+              }
+            }
+          }
+      \`,
+      props.store,
+    );
+  `;
+
+  const result = compile(
+    path.join(basePath, id),
+    source,
+    {
+      module: 'esmodule',
+      isDevelopment: false,
+      codegenCommand: 'codegen',
+    },
+  );
+
+  expect(result.code).toMatchInlineSnapshot(`
+    "import graphql__377c0c6e599b36af97db2c55671f4c42 from "./__generated__/SellingProductListFragmentContainer_store_representActiveProducts.graphql";
+    const data = useFragment(
+      graphql__377c0c6e599b36af97db2c55671f4c42,
+      props.store,
+    );"
+  `);
+});

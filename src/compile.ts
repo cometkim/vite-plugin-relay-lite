@@ -2,7 +2,8 @@ import * as crypto from 'node:crypto';
 import * as path from 'node:path';
 import MagicString, { type SourceMap } from 'magic-string';
 
-import { print, parse, Kind } from 'graphql';
+import { parse, Kind } from 'graphql';
+import { print } from './graphql-printer.ts';
 
 export type CompileOptions = {
   module: 'esmodule' | 'commonjs';
