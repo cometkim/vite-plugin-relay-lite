@@ -1,5 +1,16 @@
 # vite-plugin-relay-lite
 
+## 0.7.1
+
+### Patch Changes
+
+- 86e024d: Fix mixed parsing cases (#94)
+
+  - Fixed #94
+  - See also #96
+
+  - (Thanks @eMerzh for reporting the case)
+
 ## 0.7.0
 
 ### Minor Changes

@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-relay-lite",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Vite plugin for more convenient Relay experience",
   "homepage": "https://github.com/cometkim/vite-plugin-relay-lite",
   "author": {
