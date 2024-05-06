@@ -25,11 +25,8 @@ export function compile(
   const content = new MagicString(source);
   const imports: string[] = [];
 
-  content.replace(/(^(?!\/\/)|[\=\?\:\|\&])([^\'\"\`]+?)graphql`([\s\S]*?)`/gm, (match, token, prefix, query) => {
-    if (
-      prefix.trimStart().startsWith('//') ||
-      query.trimStart().startsWith('//')
-    ) {
+  content.replace(/(^ *|[\=\?\:\|\&\(][^\'\"\`]?)graphql`([\s\S]*?)`/gm, (match, prefix, query) => {
+    if (query.includes('//')) {
       return match;
     }
 
@@ -99,7 +96,7 @@ export function compile(
       }
     }
 
-    return token + prefix + result;
+    return prefix + result;
   });
 
   content.prepend(

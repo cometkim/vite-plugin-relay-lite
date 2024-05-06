@@ -116,86 +116,66 @@ test('compile esmodule in-development', () => {
   `);
 });
 
-test.each([
-  dedent`
-    const host = \`\${server}/graphql\`
-
-    const otherTemplate = \`foo\`
-  `,
-])('false positive test', source => {
-  const basePath = '/project';
-  const id = '__MODULE__';
-
-  const result = compile(
-    path.join(basePath, id),
-    source,
-    {
-      module: 'esmodule',
-      isDevelopment: false,
-      codegenCommand: 'codegen',
-    },
-  );
-
-  expect(result.code).toEqual(source);
-});
-
-test('comments', () => {
+test('mixed case', () => {
   const basePath = '/project';
   const id = '__MODULE__';
 
   const source = dedent`
-    const query1 = graphql\`
+    import external from 'x/y';
+
+    const host = \`\${host}/graphql\`;
+
+    graphql\`
       query Test {
         # This should be compiled
         __typename
       }
     \`;
 
+    useFragment(graphql\`
+      fragment TestFragment on Query {
+        # This should be compiled
+        __typename
+      }
+    \`, props.query);
+
+    const data = useFragment(
+      graphql\`
+        fragment TestFragment on Query {
+          # This should be compiled
+          __typename
+        }
+      \`,
+      props.query,
+    );
+
+    // leading comment
+    const testQuery = graphql\`
+      query Test {
+        # This should be compiled
+        __typename
+      }
+    \`;
+
+    const conditionalQuery = condition ? graphql\`
+      query TestTruthy {
+        __typename
+      }
+    \` : graphql\`
+      query TestFalsy {
+        __typename
+      }
+    \`;
+
+    // Commented query
     // This shouldn't be compiled
-    // const query2 = graphql\`
+    //
+    // const testQuery = graphql\`
     //   query Test {
+    //     # This should be compiled
     //     __typename
     //   }
     // \`;
-  `;
-
-  const result = compile(
-    path.join(basePath, id),
-    source,
-    {
-      module: 'commonjs',
-      isDevelopment: false,
-      codegenCommand: 'codegen',
-    },
-  );
-
-  expect(result.code).toEqual(dedent`
-    const query1 = require("./__generated__/Test.graphql");
-
-    // This shouldn't be compiled
-    // const query2 = graphql\`
-    //   query Test {
-    //     __typename
-    //   }
-    // \`;
-  `);
-});
-
-
-test('comments starting', () => {
-  const basePath = '/project';
-  const id = '__MODULE__';
-
-  const source = dedent`
-  import brol from 'x/y';
-
-  // see SpaceSelect
-  const spaceSelectQuery = graphql\`
-  query Test {
-      # This should be compiled
-      __typename
-  }
-  \`
   `;
 
   const result = compile(
@@ -208,12 +188,40 @@ test('comments starting', () => {
     },
   );
 
-  expect(result.code).toEqual(dedent`
-    import brol from 'x/y';
+  expect(result.code).toMatchInlineSnapshot(`
+    "import graphql__f4ce3be5b8e81a99157cd3e378f936b6 from "./__generated__/Test.graphql";
+    import graphql__be4d44055d9f79bc8ffc68b6e8277222 from "./__generated__/TestFragment.graphql";
+    import graphql__be4d44055d9f79bc8ffc68b6e8277222 from "./__generated__/TestFragment.graphql";
     import graphql__f4ce3be5b8e81a99157cd3e378f936b6 from "./__generated__/Test.graphql";
+    import graphql__37866396c946bd011298fc64841dcb46 from "./__generated__/TestTruthy.graphql";
+    import graphql__60fd06bd826b4b4bd4d4bb065b9f6e73 from "./__generated__/TestFalsy.graphql";
+    import external from 'x/y';
 
-    // This shouldn't be an issue
-    const spaceSelectQuery = graphql__f4ce3be5b8e81a99157cd3e378f936b6;
+    const host = \`\${host}/graphql\`;
+
+    graphql__f4ce3be5b8e81a99157cd3e378f936b6;
+
+    useFragment(graphql__be4d44055d9f79bc8ffc68b6e8277222, props.query);
+
+    const data = useFragment(
+      graphql__be4d44055d9f79bc8ffc68b6e8277222,
+      props.query,
+    );
+
+    // leading comment
+    const testQuery = graphql__f4ce3be5b8e81a99157cd3e378f936b6;
+
+    const conditionalQuery = condition ? graphql__37866396c946bd011298fc64841dcb46 : graphql__60fd06bd826b4b4bd4d4bb065b9f6e73;
+
+    // Commented query
+    // This shouldn't be compiled
+    //
+    // const testQuery = graphql\`
+    //   query Test {
+    //     # This should be compiled
+    //     __typename
+    //   }
+    // \`;"
   `);
 });
 
