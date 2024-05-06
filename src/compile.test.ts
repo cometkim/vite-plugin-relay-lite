@@ -181,6 +181,43 @@ test('comments', () => {
   `);
 });
 
+
+test('comments starting', () => {
+  const basePath = '/project';
+  const id = '__MODULE__';
+
+  const source = dedent`
+  import brol from 'x/y';
+
+  // see SpaceSelect
+  const spaceSelectQuery = graphql\`
+  query Test {
+      # This should be compiled
+      __typename
+  }
+  \`
+  `;
+
+  const result = compile(
+    path.join(basePath, id),
+    source,
+    {
+      module: 'esmodule',
+      isDevelopment: false,
+      codegenCommand: 'codegen',
+    },
+  );
+
+  expect(result.code).toEqual(dedent`
+    import brol from 'x/y';
+    import graphql__f4ce3be5b8e81a99157cd3e378f936b6 from "./__generated__/Test.graphql";
+
+    // This shouldn't be an issue
+    const spaceSelectQuery = graphql__f4ce3be5b8e81a99157cd3e378f936b6;
+  `);
+});
+
+
 test('https://github.com/cometkim/vite-plugin-relay-lite/issues/53', () => {
   const basePath = '/project';
   const id = '__MODULE__';
