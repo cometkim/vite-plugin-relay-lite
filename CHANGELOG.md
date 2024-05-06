@@ -1,5 +1,11 @@
 # vite-plugin-relay-lite
 
+## 0.7.3
+
+### Patch Changes
+
+- 0053627: Dedupe import statements for compiled documents
+
 ## 0.7.2
 
 ### Patch Changes
