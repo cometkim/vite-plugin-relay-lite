@@ -204,11 +204,8 @@ test('mixed case', () => {
   expect(result.code).toMatchInlineSnapshot(`
     "import graphql__f4ce3be5b8e81a99157cd3e378f936b6 from "./__generated__/Test.graphql";
     import graphql__be4d44055d9f79bc8ffc68b6e8277222 from "./__generated__/TestFragment.graphql";
-    import graphql__be4d44055d9f79bc8ffc68b6e8277222 from "./__generated__/TestFragment.graphql";
-    import graphql__f4ce3be5b8e81a99157cd3e378f936b6 from "./__generated__/Test.graphql";
     import graphql__37866396c946bd011298fc64841dcb46 from "./__generated__/TestTruthy.graphql";
     import graphql__60fd06bd826b4b4bd4d4bb065b9f6e73 from "./__generated__/TestFalsy.graphql";
-    import graphql__f4ce3be5b8e81a99157cd3e378f936b6 from "./__generated__/Test.graphql";
     import external from 'x/y';
 
     const host = \`\${host}/graphql\`;

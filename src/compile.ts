@@ -100,7 +100,7 @@ export function compile(
   });
 
   content.prepend(
-    [...imports, ''].join('\n'),
+    [...new Set(imports), ''].join('\n'),
   );
 
   return {
