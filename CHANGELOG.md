@@ -1,5 +1,11 @@
 # vite-plugin-relay-lite
 
+## 0.7.2
+
+### Patch Changes
+
+- 97c270d: Fix tag detection with tabs
+
 ## 0.7.1
 
 ### Patch Changes
