@@ -1,5 +1,11 @@
 # vite-plugin-relay-lite
 
+## 0.7.4
+
+### Patch Changes
+
+- 49d47b2: Fix compilation on a valid usage (e.g. <code>createQueryRenderer(Comp, graphql\`...\`)</code>)
+
 ## 0.7.3
 
 ### Patch Changes
