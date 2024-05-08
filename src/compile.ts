@@ -25,7 +25,19 @@ export function compile(
   const content = new MagicString(source);
   const imports: string[] = [];
 
-  content.replace(/(^\s*|[\=\?\:\|\&\(][^\'\"\`]?)graphql`([\s\S]*?)`/gm, (match, prefix, query) => {
+  /**
+   * Test on https://regex101.com/r/qfrOft/2
+   *
+   * groups
+   * - 1st `prefix`
+   *   - `^\s*` - tag can appears at the beginning of the source
+   *   - `[\=\?\:\|\&\(\,\;]\s*)` - Or right after any of JS' terminals / in operations
+   * - 2nd `query`
+   *   - `[\s\S]*?` - multiline text (lazy) inside of the `graphql` tag
+   */
+  const pattern = /(^\s*|[\=\?\:\|\&\(\,\;]\s*)graphql`([\s\S]*?)`/gm;
+  content.replace(pattern, (match, prefix: string, query: string) => {
+    // The `//` is invalid in GraphQL, so it probably means JS comment line
     if (query.includes('//')) {
       return match;
     }

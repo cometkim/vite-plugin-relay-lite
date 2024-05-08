@@ -189,6 +189,15 @@ test('mixed case', () => {
         variables: () => ({}),
       },
     );
+
+    export default createQueryRenderer(TestQuery, graphql\`
+      query Test {
+        __typename
+      }
+    \`, {
+      environment,
+      variables: () => ({}),
+    });
   `;
 
   const result = compile(
@@ -241,7 +250,12 @@ test('mixed case', () => {
         environment,
         variables: () => ({}),
       },
-    );"
+    );
+
+    export default createQueryRenderer(TestQuery, graphql__f4ce3be5b8e81a99157cd3e378f936b6, {
+      environment,
+      variables: () => ({}),
+    });"
   `);
 });
 
