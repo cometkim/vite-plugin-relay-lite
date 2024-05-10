@@ -1,7 +1,7 @@
 import * as path from 'node:path';
 
 import kleur from 'kleur';
-import { type Plugin } from 'vite';
+import type { Plugin } from 'vite';
 import { cosmiconfigSync, defaultLoaders } from 'cosmiconfig';
 
 import { compile } from './compile.ts';
@@ -9,7 +9,7 @@ import { launchProcess } from './codegen.ts';
 
 type AnyObject = Record<string, unknown>;
 
-type Config = {
+export type Config = {
   codegen?: boolean,
   relayConfig?: string | AnyObject,
   module?: 'esmodule' | 'commonjs',
