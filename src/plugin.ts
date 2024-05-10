@@ -9,13 +9,31 @@ import { launchProcess } from './codegen.ts';
 
 type AnyObject = Record<string, unknown>;
 
-export type Config = {
+export type PluginOptions = {
+  /**
+   * Automatically execute `relay-compiler` command as necessary.
+   *
+   * @default true
+   */
   codegen?: boolean,
+
+  /**
+   * Path to the Relay config file.
+   * Or pass config object directly to customize behavior.
+   *
+   * @default Will be searched in the project automatically.
+   */
   relayConfig?: string | AnyObject,
+
+  /**
+   * Module format on outputs
+   *
+   * @default follows the `eagerESModules` in the Relay config.
+   */
   module?: 'esmodule' | 'commonjs',
 
   /**
-   * (Experimental) omit import statement of `graphql` tag
+   * (Experimental) omit import statement of the `graphql` tag.
    */
   omitTagImport?: boolean,
 };
@@ -35,17 +53,17 @@ const configExplorer = cosmiconfigSync('relay', {
   },
 });
 
-export default function makePlugin(config: Config = {}): Plugin {
+export default function makePlugin(options: PluginOptions = {}): Plugin {
   const cwd = process.cwd();
 
   let relayConfig: AnyObject = {};
   let relayConfigPath: string | null = null;
-  if (config.relayConfig && typeof config.relayConfig === 'object') {
-    relayConfig = config.relayConfig;
+  if (options.relayConfig && typeof options.relayConfig === 'object') {
+    relayConfig = options.relayConfig;
   } else {
     try {
-      const result = typeof config.relayConfig === 'string'
-        ? configExplorer.load(config.relayConfig)
+      const result = typeof options.relayConfig === 'string'
+        ? configExplorer.load(options.relayConfig)
         : configExplorer.search(cwd);
       if (result) {
         relayConfig = result.config;
@@ -59,8 +77,8 @@ export default function makePlugin(config: Config = {}): Plugin {
   const sourceDirectory = path.resolve(cwd, (relayConfig['src'] as string) || './src').split(path.sep).join(path.posix.sep);
   const artifactDirectory = relayConfig['artifactDirectory'];
   const codegenCommand = (relayConfig['codegenCommand'] as string) || 'relay-compiler';
-  const module = config.module || ((relayConfig['eagerESModules'] || relayConfig['eagerEsModules']) ? 'esmodule' : 'commonjs');
-  const omitTagImport = config.omitTagImport ?? false;
+  const module = options.module || ((relayConfig['eagerESModules'] || relayConfig['eagerEsModules']) ? 'esmodule' : 'commonjs');
+  const omitTagImport = options.omitTagImport ?? false;
 
   if (module !== 'esmodule') {
     console.warn(
@@ -75,7 +93,7 @@ export default function makePlugin(config: Config = {}): Plugin {
     name: 'vite-plugin-relay-lite',
     enforce: 'pre',
     async configResolved({ build, command, mode }) {
-      if (config.codegen === false) {
+      if (options.codegen === false) {
         return;
       }
 

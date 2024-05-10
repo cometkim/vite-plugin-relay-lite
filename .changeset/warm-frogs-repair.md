@@ -2,4 +2,4 @@
 "vite-plugin-relay-lite": patch
 ---
 
-export `Config` type from entry
+export `PluginOptions` type from entry
