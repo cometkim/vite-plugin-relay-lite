@@ -157,6 +157,73 @@ test('mixed case', () => {
       }
     \`;
 
+    const testQuery =
+      // inner comment
+      graphql\`
+        query Test {
+          # This should be compiled
+          __typename
+        }
+      \`;
+
+    const testQuery =
+      /* notation */
+      graphql\`
+        query Test {
+          # This should be compiled
+          __typename
+        }
+      \`;
+
+    const testQuery = /* notation */ graphql\`
+      query Test {
+        # This should be compiled
+        __typename
+      }
+    \`;
+
+    ()graphql\`
+      query Test {
+        # This should be compiled
+        __typename
+      }
+    \`
+ 
+    {}graphql\`
+      query Test {
+        # This should be compiled
+        __typename
+      }
+    \`
+
+    []graphql\`
+      query Test {
+        # This should be compiled
+        __typename
+      }
+    \`
+
+    [graphql\`
+      query Test {
+        # This should be compiled
+        __typename
+      }
+    \`]
+
+    {...graphql\`
+      query Test {
+        # This should be compiled
+        __typename
+      }
+    \`}
+
+    const fn = () => graphql\`
+      query Test {
+        # This should be compiled
+        __typename
+      }
+    \`;
+
     const conditionalQuery = condition ? graphql\`
       query TestTruthy {
         __typename
@@ -176,6 +243,15 @@ test('mixed case', () => {
     //     __typename
     //   }
     // \`;
+
+    // Comments in query
+    const testQuery = graphql\`
+      query Test {
+        # This should be compiled
+        # // Even this
+        __typename
+      }
+    \`;
     
     export default createQueryRenderer(
       TestQuery,
@@ -231,6 +307,28 @@ test('mixed case', () => {
     // leading comment
     const testQuery = graphql__f4ce3be5b8e81a99157cd3e378f936b6;
 
+    const testQuery =
+      // inner comment
+      graphql__f4ce3be5b8e81a99157cd3e378f936b6;
+
+    const testQuery =
+      /* notation */
+      graphql__f4ce3be5b8e81a99157cd3e378f936b6;
+
+    const testQuery = /* notation */ graphql__f4ce3be5b8e81a99157cd3e378f936b6;
+
+    ()graphql__f4ce3be5b8e81a99157cd3e378f936b6
+     
+    {}graphql__f4ce3be5b8e81a99157cd3e378f936b6
+
+    []graphql__f4ce3be5b8e81a99157cd3e378f936b6
+
+    [graphql__f4ce3be5b8e81a99157cd3e378f936b6]
+
+    {...graphql__f4ce3be5b8e81a99157cd3e378f936b6}
+
+    const fn = () => graphql__f4ce3be5b8e81a99157cd3e378f936b6;
+
     const conditionalQuery = condition ? graphql__37866396c946bd011298fc64841dcb46 : graphql__60fd06bd826b4b4bd4d4bb065b9f6e73;
 
     // Commented query
@@ -242,6 +340,9 @@ test('mixed case', () => {
     //     __typename
     //   }
     // \`;
+
+    // Comments in query
+    const testQuery = graphql__f4ce3be5b8e81a99157cd3e378f936b6;
 
     export default createQueryRenderer(
       TestQuery,

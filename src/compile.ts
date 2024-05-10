@@ -26,19 +26,27 @@ export function compile(
   const imports: string[] = [];
 
   /**
-   * Test on https://regex101.com/r/qfrOft/2
+   * Tested on https://regex101.com/r/qfrOft/6
    *
    * groups
    * - 1st `prefix`
-   *   - `^\s*` - tag can appears at the beginning of the source
-   *   - `[\=\?\:\|\&\(\,\;]\s*)` - Or right after any of JS' terminals / in operations
-   * - 2nd `query`
+   *   - `^` - Tag can appears at the beginning of the source
+   *   - `[\=\?\:\|\&\,\;\(\)\}\[\]\.\>]` - Or right after any of JS' exp/terminal token
+   *   - `\*\/` - Or right after /*...*\/ comment
+   * - 2rd `blank`
+   *   - `\s*` - blank characters (spaces, tabs, lf, etc) before the `graphql` tag
+   * - 3rd `query`
    *   - `[\s\S]*?` - multiline text (lazy) inside of the `graphql` tag
    */
-  const pattern = /(^\s*|[\=\?\:\|\&\(\,\;]\s*)graphql`([\s\S]*?)`/gm;
-  content.replace(pattern, (match, prefix: string, query: string) => {
-    // The `//` is invalid in GraphQL, so it probably means JS comment line
-    if (query.includes('//')) {
+  const pattern = /(?<prefix>^|[\=\?\:\|\&\,\;\(\)\}\[\]\.\>]|\*\/)(?<blank>\s*)graphql`(?<query>[\s\S]*?)`/gm;
+  content.replace(pattern, (match, prefix: string, blank: string, query: string) => {
+    // Guess if it is in JS comment lines
+    //
+    // Equvilant to:
+    // (query.split('\n').some(line => line.trimStart().startsWith('//')))
+    //
+    // But 1x ~ 3x faster
+    if (/^\s*(?!#)\/\//gm.test(query)) {
       return match;
     }
 
@@ -108,7 +116,7 @@ export function compile(
       }
     }
 
-    return prefix + result;
+    return prefix + blank + result;
   });
 
   content.prepend(
