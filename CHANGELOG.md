@@ -1,5 +1,20 @@
 # vite-plugin-relay-lite
 
+## 0.8.0
+
+### Minor Changes
+
+- a29a250: Add experimental feature to omit `graphql` tag imports
+- 77e4fd6: export `PluginOptions` type from entry
+
+### Patch Changes
+
+- a3aef3e: Fix potential edge cases
+
+  - Using `/* ... */` notation before the tag
+  - Spreading (`...`) the tag result
+  - In minified codes
+
 ## 0.7.4
 
 ### Patch Changes
