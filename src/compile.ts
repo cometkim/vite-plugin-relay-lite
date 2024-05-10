@@ -26,19 +26,19 @@ export function compile(
   const imports: string[] = [];
 
   /**
-   * Tested on https://regex101.com/r/qfrOft/6
+   * Tested on https://regex101.com/r/qfrOft/8
    *
    * groups
    * - 1st `prefix`
    *   - `^` - Tag can appears at the beginning of the source
-   *   - `[\=\?\:\|\&\,\;\(\)\}\[\]\.\>]` - Or right after any of JS' exp/terminal token
+   *   - `[\=\?\:\|\&\,\;\(\[\}\.\>]` - Or right after any of JS' exp/terminal token
    *   - `\*\/` - Or right after /*...*\/ comment
    * - 2rd `blank`
    *   - `\s*` - blank characters (spaces, tabs, lf, etc) before the `graphql` tag
    * - 3rd `query`
    *   - `[\s\S]*?` - multiline text (lazy) inside of the `graphql` tag
    */
-  const pattern = /(?<prefix>^|[\=\?\:\|\&\,\;\(\)\}\[\]\.\>]|\*\/)(?<blank>\s*)graphql`(?<query>[\s\S]*?)`/gm;
+  const pattern = /(?<prefix>^|[\=\?\:\|\&\,\;\(\[\}\.\>]|\*\/)(?<blank>\s*)graphql`(?<query>[\s\S]*?)`/gm;
   content.replace(pattern, (match, prefix: string, blank: string, query: string) => {
     // Guess if it is in JS comment lines
     //
