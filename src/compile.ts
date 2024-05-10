@@ -24,7 +24,7 @@ export function compile(
   options: CompileOptions,
 ): CompileResult {
   const content = new MagicString(source);
-  const imports: string[] = [];
+  const imports = new Set<string>();
 
   /**
    * Tested on https://regex101.com/r/qfrOft/8
@@ -90,7 +90,7 @@ export function compile(
 
     switch (options.module) {
       case 'esmodule': {
-        imports.push(`import ${id} from "${importPath}";`);
+        imports.add(`import ${id} from "${importPath}";`);
         break;
       }
       case 'commonjs': {
@@ -121,7 +121,7 @@ export function compile(
   });
 
   content.prepend(
-    [...new Set(imports), ''].join('\n'),
+    [...imports, ''].join('\n'),
   );
 
   if (options.omitTagImport) {
