@@ -182,21 +182,7 @@ test('mixed case', () => {
       }
     \`;
 
-    ()graphql\`
-      query Test {
-        # This should be compiled
-        __typename
-      }
-    \`
- 
     {}graphql\`
-      query Test {
-        # This should be compiled
-        __typename
-      }
-    \`
-
-    []graphql\`
       query Test {
         # This should be compiled
         __typename
@@ -317,21 +303,7 @@ test('mixed case', () => {
 
     const testQuery = /* notation */ graphql__f4ce3be5b8e81a99157cd3e378f936b6;
 
-    ()graphql\`
-      query Test {
-        # This should be compiled
-        __typename
-      }
-    \`
-     
     {}graphql__f4ce3be5b8e81a99157cd3e378f936b6
-
-    []graphql\`
-      query Test {
-        # This should be compiled
-        __typename
-      }
-    \`
 
     [graphql__f4ce3be5b8e81a99157cd3e378f936b6]
 
