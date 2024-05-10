@@ -13,6 +13,11 @@ export type Config = {
   codegen?: boolean,
   relayConfig?: string | AnyObject,
   module?: 'esmodule' | 'commonjs',
+
+  /**
+   * (Experimental) omit import statement of `graphql` tag
+   */
+  omitTagImport?: boolean,
 };
 
 const configExplorer = cosmiconfigSync('relay', {
@@ -55,6 +60,7 @@ export default function makePlugin(config: Config = {}): Plugin {
   const artifactDirectory = relayConfig['artifactDirectory'];
   const codegenCommand = (relayConfig['codegenCommand'] as string) || 'relay-compiler';
   const module = config.module || ((relayConfig['eagerESModules'] || relayConfig['eagerEsModules']) ? 'esmodule' : 'commonjs');
+  const omitTagImport = config.omitTagImport ?? false;
 
   if (module !== 'esmodule') {
     console.warn(
@@ -105,6 +111,7 @@ export default function makePlugin(config: Config = {}): Plugin {
       const result = compile(id, src, {
         module,
         codegenCommand,
+        omitTagImport,
         isDevelopment: env.NODE_ENV !== 'production',
         ...typeof artifactDirectory === 'string' && { artifactDirectory },
       });

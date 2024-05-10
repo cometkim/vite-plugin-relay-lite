@@ -9,6 +9,7 @@ export type CompileOptions = {
   module: 'esmodule' | 'commonjs';
   codegenCommand: string;
   isDevelopment: boolean;
+  omitTagImport?: boolean;
   artifactDirectory?: string;
 };
 
@@ -123,10 +124,21 @@ export function compile(
     [...new Set(imports), ''].join('\n'),
   );
 
+  if (options.omitTagImport) {
+    omitImports(content);
+  }
+
   return {
     code: content.toString(),
     map: content.generateMap({ hires: true }),
   };
+}
+
+function omitImports(content: MagicString) {
+  const pattern = /(^[ \t]*(import|const|let|var)\s*{([^}]*?\s*)??)(\s*graphql,\s*|\s*,?\s*graphql\s*)([^}]*\s*?})/gm;
+  content.replace(pattern, (_match, $1: string, _$2, _$3, _omit: string, $5: string) => {
+    return $1 + $5;
+  });
 }
 
 function getErrorMessage(name: string, codegenCommand: string) {

@@ -96,6 +96,22 @@ Or you can set the `codegen` option to `false` to disable it.
 
 Plugin respects the `codegenCommand` option in the Relay config, it uses `relay-compiler` if not set.
 
+### (Experimental) Omit `graphql` tag imports
+
+You can set `omitTagImport: true` to omit import/require statements for the `graphql` tag.
+
+```js
+{
+  plugins: [
+    relay({
+      omitTagImport: true
+    })
+  ]
+}
+```
+
+This might causes the Vite build to fail, allowing early detection of potential transform errors.
+
 ## Acknowledgements
 
 The compilation has ported from [esbuild-plugin-relay](https://github.com/smartvokat/esbuild-plugin-relay), which was originally introduced from [a gist by Samuel Cormier-Iijima](https://gist.github.com/sciyoshi/34e5865f2523848f0d60b4cdd49382ee)

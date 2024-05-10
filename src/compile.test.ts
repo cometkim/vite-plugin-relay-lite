@@ -116,6 +116,85 @@ test('compile esmodule in-development', () => {
   `);
 });
 
+test('compile with omitTagImport', () => {
+  const basePath = '/project';
+  const id = '__MODULE__';
+
+  const source = dedent`
+    import {graphql} from 'react-relay';
+
+    import { graphql } from 'react-relay';
+
+    import {another1,graphql} from 'react-relay';
+
+    import {graphql,another2} from 'react-relay';
+
+    import {another1,graphql,another2} from 'react-relay';
+
+    import {
+      other,
+      graphql,
+      asdfdsaf
+    } from 'react-relay';
+
+    const {
+      other,
+      graphql,
+      asdfdsaf
+    } = require('react-relay');
+
+    let {graphql} = await import('react-relay');
+
+    var {graphql} = require('react-relay');
+
+    const query = graphql\`
+      query Test {
+        __typename
+      }
+    \`;
+  `;
+
+  const result = compile(
+    path.join(basePath, id),
+    source,
+    {
+      module: 'esmodule',
+      isDevelopment: false,
+      codegenCommand: 'codegen',
+      omitTagImport: true,
+    },
+  );
+
+  expect(result.code).toMatchInlineSnapshot(`
+    "import graphql__f4ce3be5b8e81a99157cd3e378f936b6 from "./__generated__/Test.graphql";
+    import {} from 'react-relay';
+
+    import {} from 'react-relay';
+
+    import {another1} from 'react-relay';
+
+    import {another2} from 'react-relay';
+
+    import {another1,another2} from 'react-relay';
+
+    import {
+      other,
+      asdfdsaf
+    } from 'react-relay';
+
+    const {
+      other,
+      asdfdsaf
+    } = require('react-relay');
+
+    let {} = await import('react-relay');
+
+    var {} = require('react-relay');
+
+    const query = graphql__f4ce3be5b8e81a99157cd3e378f936b6;"
+  `);
+});
+
 test('mixed case', () => {
   const basePath = '/project';
   const id = '__MODULE__';
