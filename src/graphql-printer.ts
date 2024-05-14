@@ -16,7 +16,7 @@ export function print(ast: ASTNode): string {
   return visit<string>(ast, {
     Name: { leave: node => node.value },
     Variable: { leave: node => '$' + node.name },
-    Document: { leave: node => join(node.definitions, '\n\n') + '\n' },
+    Document: { leave: node => join(node.definitions, '\n') + '\n' },
     OperationDefinition: {
       leave(node) {
         const varDefs = wrap('(', join(node.variableDefinitions, ', '), ')');
@@ -212,14 +212,12 @@ function printString(str: string): string {
   return `"${str.replace(escapedRegExp, escapedReplacer)}"`;
 }
 
-// eslint-disable-next-line no-control-regex
 const escapedRegExp = /[\x00-\x1f\x22\x5c\x7f-\x9f]/g;
 
 function escapedReplacer(str: string): string {
   return escapeSequences[str.charCodeAt(0)];
 }
 
-// prettier-ignore
 const escapeSequences = [
   '\\u0000', '\\u0001', '\\u0002', '\\u0003', '\\u0004', '\\u0005', '\\u0006', '\\u0007',
   '\\b',     '\\t',     '\\n',     '\\u000B', '\\f',     '\\r',     '\\u000E', '\\u000F',
