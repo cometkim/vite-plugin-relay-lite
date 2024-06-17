@@ -83,7 +83,7 @@ export default function makePlugin(options: PluginOptions = {}): Plugin {
   if (module !== 'esmodule') {
     console.warn(
       kleur.yellow(
-        'Using CommonJS may not works.\n' +
+        'Using CommonJS may not work.\n' +
         'Consider to set `eagerEsModules` to `true` in your Relay config',
       ),
     );
