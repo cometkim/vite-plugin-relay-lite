@@ -1,5 +1,12 @@
 # vite-plugin-relay-lite
 
+## 0.8.1
+
+### Patch Changes
+
+- 9006daf: Fix potential mismatch with the Relay compiler on multiple fragments
+- 5b9fd24: fixed issue with backslash and corrected typo
+
 ## 0.8.0
 
 ### Minor Changes
