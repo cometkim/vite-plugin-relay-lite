@@ -161,5 +161,8 @@ function getRelativeImportPath(
   const relativeReference =
     relativePath.length === 0 || !relativePath.startsWith('.') ? './' : '';
 
-  return relativeReference + path.join(relativePath, fileToRequire);
+  const joinedPath = relativeReference + path.join(relativePath, fileToRequire)
+  
+  // replace all backslashes with forward slashes to fix issue with importing on windows
+  return joinedPath.replaceAll("\\", "/");
 }
