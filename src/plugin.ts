@@ -116,7 +116,8 @@ export default function makePlugin(options: PluginOptions = {}): Plugin {
         return;
       }
 
-      if (!/\.(c|m)?(j|t)sx?$/.test(id)) {
+      const url = new URL(id, 'file:');
+      if (!/\.(c|m)?(j|t)sx?$/.test(url.pathname)) {
         return;
       }
 
