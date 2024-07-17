@@ -1,5 +1,11 @@
 # vite-plugin-relay-lite
 
+## 0.8.2
+
+### Patch Changes
+
+- 86f4a98: Check file extensions via URL parsing
+
 ## 0.8.1
 
 ### Patch Changes
