@@ -11,13 +11,9 @@ What this plugin does for you:
 - Transform codes without Babel plugin
 - Respects project's Relay config file
 
-<details>
-  <summary>Use with caution.</summary>
-
-  This plugin uses naive RegExp match instead of performing correct parsing for JavaScript.
-  So it can fail on syntax that goes beyond the scope of a regular language. (e.g. queries in multiline comments)
-
-</details>
+> [!WARNING]
+> This plugin uses naive RegExp match instead of performing correct parsing for JavaScript.
+> So it can fail on syntax that goes beyond the scope of a regular language. (e.g. queries in multiline comments)
 
 ## Installation
 
