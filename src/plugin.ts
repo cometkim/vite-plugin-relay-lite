@@ -2,7 +2,7 @@ import * as path from 'node:path';
 
 import kleur from 'kleur';
 import type { Plugin } from 'vite';
-import { cosmiconfigSync, defaultLoaders } from 'cosmiconfig';
+import { cosmiconfigSync, defaultLoadersSync } from 'cosmiconfig';
 
 import { compile } from './compile.ts';
 import { launchProcess } from './codegen.ts';
@@ -48,8 +48,8 @@ const configExplorer = cosmiconfigSync('relay', {
     'package.json',
   ],
   loaders: {
-    '.json': defaultLoaders['.json'],
-    '.js': defaultLoaders['.js'],
+    '.json': defaultLoadersSync['.json'],
+    '.js': defaultLoadersSync['.js'],
   },
 });
 
