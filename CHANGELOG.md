@@ -1,5 +1,11 @@
 # vite-plugin-relay-lite
 
+## 0.8.3
+
+### Patch Changes
+
+- d26f447: Fixed config loader
+
 ## 0.8.2
 
 ### Patch Changes
