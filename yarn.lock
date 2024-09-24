@@ -289,6 +289,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cometjs/core@npm:^2.3.2":
+  version: 2.3.2
+  resolution: "@cometjs/core@npm:2.3.2"
+  peerDependencies:
+    typescript: ^4.5.0 || ^5.0.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10c0/5bdeff8576511b253463d2654612d449418ace314ba54480aeff66d53f4faef55713b6e14f51d6129cbff47607cc3b9456f7ae2f2889c1b7cb6ba26d13d6c72b
+  languageName: node
+  linkType: hard
+
 "@esbuild/aix-ppc64@npm:0.21.4":
   version: 0.21.4
   resolution: "@esbuild/aix-ppc64@npm:0.21.4"
@@ -3200,6 +3212,7 @@ __metadata:
   resolution: "vite-plugin-relay-lite@workspace:."
   dependencies:
     "@changesets/cli": "npm:^2.27.1"
+    "@cometjs/core": "npm:^2.3.2"
     "@types/common-tags": "npm:^1"
     "@types/node": "npm:^22.0.0"
     common-tags: "npm:^1.8.2"
