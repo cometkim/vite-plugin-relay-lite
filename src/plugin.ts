@@ -45,6 +45,8 @@ const configExplorer = cosmiconfigSync('relay', {
     'relay.config.json',
     '.config/relay.config.js',
     '.config/relay.config.json',
+    '.config/relay.js',
+    '.config/relay.json',
     'package.json',
   ],
   loaders: {
