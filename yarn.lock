@@ -841,11 +841,11 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:^20.0.0":
-  version: 20.16.7
-  resolution: "@types/node@npm:20.16.7"
+  version: 20.16.8
+  resolution: "@types/node@npm:20.16.8"
   dependencies:
     undici-types: "npm:~6.19.2"
-  checksum: 10c0/3f338dddf4ecfe95b77ce5eacb0d36bca970f88f0143afc83327120230a24060d4a0730c3d54e8ca1aa6eb85d83570e41b430b71d441ee626357a0d7e3d1ae8b
+  checksum: 10c0/3b3bd96885cbbe49e5f701be91f9a69b904a60b23fd4812083b053a802a03e38227919ff800aff2961fd11147b471a1a4fc09f1df171f372698f16d39859aebf
   languageName: node
   linkType: hard
 
