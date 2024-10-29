@@ -6,6 +6,7 @@ type Options = {
   codegenCommand: string,
   relayConfigPath: string | null,
   watch: boolean,
+  project: string | null,
 };
 
 export async function launchProcess(options: Options): Promise<void> {
@@ -14,6 +15,10 @@ export async function launchProcess(options: Options): Promise<void> {
 
   if (options.watch) {
     args.push('--watch');
+  }
+
+  if (options.project) {
+    args.push('--project', options.project);
   }
 
   if (options.relayConfigPath) {

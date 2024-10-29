@@ -1,13 +1,12 @@
 import * as path from 'node:path';
-
+import importFresh from 'import-fresh';
 import kleur from 'kleur';
-import type { Plugin } from 'vite';
+import { type Plugin } from 'vite';
 import { cosmiconfigSync, defaultLoadersSync } from 'cosmiconfig';
 
 import { compile } from './compile.ts';
 import { launchProcess } from './codegen.ts';
-
-type AnyObject = Record<string, unknown>;
+import { type RelayConfig, type RelaySingleConfig } from './relay-config.ts';
 
 export type PluginOptions = {
   /**
@@ -21,14 +20,14 @@ export type PluginOptions = {
    * Path to the Relay config file.
    * Or pass config object directly to customize behavior.
    *
-   * @default Will be searched in the project automatically.
+   * @default config Will be searched in the project automatically.
    */
-  relayConfig?: string | AnyObject,
+  relayConfig?: string | RelaySingleConfig,
 
   /**
    * Module format on outputs
    *
-   * @default follows the `eagerESModules` in the Relay config.
+   * @default 'eagerEsModules' follows the `eagerEsModules` in the Relay config.
    */
   module?: 'esmodule' | 'commonjs',
 
@@ -58,10 +57,16 @@ const configExplorer = cosmiconfigSync('relay', {
 export default function makePlugin(options: PluginOptions = {}): Plugin {
   const cwd = process.cwd();
 
-  let relayConfig: AnyObject = {};
+  let relayConfig: RelaySingleConfig = {};
   let relayConfigPath: string | null = null;
-  if (options.relayConfig && typeof options.relayConfig === 'object') {
+  if (typeof options.relayConfig === 'object') {
     relayConfig = options.relayConfig;
+  } else if (typeof options.relayConfig === 'string') {
+    relayConfigPath = path.resolve(cwd, options.relayConfig);
+    // This is the same package that cosmiconfig is using
+    // Which wraps `require` call. That means it may not work on the pure ESM env
+    // FIXME: Config loading should be moved into the plugin lifecycle so make it work async
+    relayConfig = importFresh(relayConfigPath);
   } else {
     try {
       const result = typeof options.relayConfig === 'string'
