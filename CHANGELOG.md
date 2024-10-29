@@ -1,5 +1,15 @@
 # vite-plugin-relay-lite
 
+## 0.9.0
+
+### Minor Changes
+
+- d386bee: Allow `.config/relay.{js,json}` for config
+
+### Patch Changes
+
+- 10eeb2c: Fix compilation issue on QueryRenderer component
+
 ## 0.8.3
 
 ### Patch Changes
