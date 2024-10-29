@@ -27,19 +27,19 @@ export function compile(
   const imports = new Set<string>();
 
   /**
-   * Tested on https://regex101.com/r/qfrOft/8
+   * Tested on https://regex101.com/r/qfrOft/9
    *
    * groups
    * - 1st `prefix`
    *   - `^` - Tag can appears at the beginning of the source
-   *   - `[\=\?\:\|\&\,\;\(\[\}\.\>]` - Or right after any of JS' exp/terminal token
+   *   - `[\=\?\:\|\&\,\;\(\[\{\}\.\>]` - Or right after any of JS' exp/terminal token
    *   - `\*\/` - Or right after /*...*\/ comment
    * - 2rd `blank`
    *   - `\s*` - blank characters (spaces, tabs, lf, etc) before the `graphql` tag
    * - 3rd `query`
    *   - `[\s\S]*?` - multiline text (lazy) inside of the `graphql` tag
    */
-  const pattern = /(?<prefix>^|[\=\?\:\|\&\,\;\(\[\}\.\>]|\*\/)(?<blank>\s*)graphql`(?<query>[\s\S]*?)`/gm;
+  const pattern = /(?<prefix>^|[\=\?\:\|\&\,\;\(\[\{\}\.\>]|\*\/)(?<blank>\s*)graphql`(?<query>[\s\S]*?)`/gm;
   content.replace(pattern, (match, prefix: string, blank: string, query: string) => {
     // Guess if it is in JS comment lines
     //
@@ -64,9 +64,9 @@ export function compile(
     ) {
       throw new Error(
         'Expected a fragment, mutation, query, or ' +
-          'subscription, got `' +
-          definition.kind +
-          '`.',
+        'subscription, got `' +
+        definition.kind +
+        '`.',
       );
     }
 
@@ -162,7 +162,7 @@ function getRelativeImportPath(
     relativePath.length === 0 || !relativePath.startsWith('.') ? './' : '';
 
   const joinedPath = relativeReference + path.join(relativePath, fileToRequire)
-  
+
   // replace all backslashes with forward slashes to fix issue with importing on windows
   return joinedPath.replaceAll("\\", "/");
 }

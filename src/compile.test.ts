@@ -550,3 +550,61 @@ test('https://github.com/cometkim/vite-plugin-relay-lite/issues/72', () => {
     );"
   `);
 });
+
+test('https://github.com/cometkim/vite-plugin-relay-lite/issues/173', () => {
+  const basePath = '/project';
+  const id = '__MODULE__';
+
+  const source = dedent`
+    function Component () {
+      return (
+        <ErrorBoundary>
+          <QueryRenderer<AuthenticatedUserQuery>
+            query={graphql\`
+              query AuthenticatedUserQuery {
+                viewer {
+                  user {
+                    name
+                  }
+                }
+              }
+            \`}
+            render={({ props, error }) => {
+              if (error) throw error;
+              if (props) return <App {...cProps} {...props} loaded />;
+              return <App {...cProps} viewer={null} loaded={false} />;
+            }}
+          />
+        </ErrorBoundary>
+      )
+    }
+  `;
+
+  const result = compile(
+    path.join(basePath, id),
+    source,
+    {
+      module: 'esmodule',
+      isDevelopment: false,
+      codegenCommand: 'codegen',
+    },
+  );
+
+  expect(result.code).toMatchInlineSnapshot(`
+    "import graphql__2ee5243a7e1fe9751416af0fb9070ed8 from "./__generated__/AuthenticatedUserQuery.graphql";
+    function Component () {
+      return (
+        <ErrorBoundary>
+          <QueryRenderer<AuthenticatedUserQuery>
+            query={graphql__2ee5243a7e1fe9751416af0fb9070ed8}
+            render={({ props, error }) => {
+              if (error) throw error;
+              if (props) return <App {...cProps} {...props} loaded />;
+              return <App {...cProps} viewer={null} loaded={false} />;
+            }}
+          />
+        </ErrorBoundary>
+      )
+    }"
+  `);
+});
