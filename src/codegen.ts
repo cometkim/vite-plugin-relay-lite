@@ -1,5 +1,4 @@
 import { spawn } from 'node:child_process';
-import { defer } from '@cometjs/core';
 import kleur from 'kleur';
 
 type Options = {
@@ -27,7 +26,7 @@ export async function launchProcess(options: Options): Promise<void> {
     windowsHide: false,
   });
 
-  const deferred = defer();
+  let compileOnce = (_value: unknown) => {};
 
   child.stdout.on('data', (chunk: string) => {
     const prefix = kleur.green(`[${cmd}]`);
@@ -39,7 +38,7 @@ export async function launchProcess(options: Options): Promise<void> {
       'Watching for changes to graphql',
     ];
     if (options.watch && watchingMessages.some(message => output.includes(message))) {
-      child.kill('SIGTERM');
+      compileOnce(true);
     }
   });
 
@@ -49,13 +48,19 @@ export async function launchProcess(options: Options): Promise<void> {
     console.error(prefix, output);
   });
 
-  child.on('close', code => {
-    if (code === 0) {
-      deferred.resolve(code);
-    } else {
-      deferred.reject(code);
-    }
-  });
-
-  await deferred;
+  if (options.watch) {
+    await new Promise(resolve => {
+      compileOnce = resolve;
+    });
+  } else {
+    await new Promise((resolve, reject) => {
+      child.on('close', code => {
+        if (code === 0) {
+          resolve(code);
+        } else {
+          reject(code);
+        }
+      });
+    });
+  }
 }
