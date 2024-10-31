@@ -1,5 +1,11 @@
 # vite-plugin-relay-lite
 
+## 0.9.1
+
+### Patch Changes
+
+- 552114d: Fix process handling
+
 ## 0.9.0
 
 ### Minor Changes
