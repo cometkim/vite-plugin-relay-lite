@@ -27,7 +27,7 @@ export function compile(
   const imports = new Set<string>();
 
   /**
-   * Tested on https://regex101.com/r/qfrOft/9
+   * Tested on https://regex101.com/r/qfrOft/10
    *
    * groups
    * - 1st `prefix`
@@ -37,9 +37,9 @@ export function compile(
    * - 2rd `blank`
    *   - `\s*` - blank characters (spaces, tabs, lf, etc) before the `graphql` tag
    * - 3rd `query`
-   *   - `[\s\S]*?` - multiline text (lazy) inside of the `graphql` tag
+   *   - `[^`]*` - multiline text (lazy) inside of the `graphql` tag
    */
-  const pattern = /(?<prefix>^|[\=\?\:\|\&\,\;\(\[\{\}\.\>]|\*\/)(?<blank>\s*)graphql`(?<query>[\s\S]*?)`/gm;
+  const pattern = /(?<prefix>^|[\=\?\:\|\&\,\;\(\[\{\}\.\>]|\*\/)(?<blank>\s*)graphql`(?<query>[^`]*)`/gm;
   content.replace(pattern, (match, prefix: string, blank: string, query: string) => {
     // Guess if it is in JS comment lines
     //
