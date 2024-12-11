@@ -1,5 +1,11 @@
 # vite-plugin-relay-lite
 
+## 0.9.2
+
+### Patch Changes
+
+- 3f343b8: Update magic-string
+
 ## 0.9.1
 
 ### Patch Changes
