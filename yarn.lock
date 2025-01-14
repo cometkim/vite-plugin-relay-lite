@@ -1837,10 +1837,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-15@npm:graphql@15.0.0":
-  version: 15.0.0
-  resolution: "graphql@npm:15.0.0"
-  checksum: 10c0/856acc12bbf791481e6626dbd2f4060b07960dda9f8d726101c9672815693bfaa044585e6c226120eb58f2880c1bdb9866dd9e71879a0a8796cb517f04e1a3d9
+"graphql-15@npm:graphql@15.10.1":
+  version: 15.10.1
+  resolution: "graphql@npm:15.10.1"
+  checksum: 10c0/8bbf6c1acda84dcff532f2ec492ffb2859d2ffd0c8e0143447c727388c5c3d7cab338143ecbdf61acc1f04227f2e0a8180f26ce9ea280b63a65079c58f6cfa25
   languageName: node
   linkType: hard
 
@@ -3238,7 +3238,7 @@ __metadata:
     common-tags: "npm:^1.8.2"
     cosmiconfig: "npm:^9.0.0"
     graphql: "npm:^16.6.0"
-    graphql-15: "npm:graphql@15.0.0"
+    graphql-15: "npm:graphql@15.10.1"
     kleur: "npm:^4.1.5"
     magic-string: "npm:^0.30.1"
     nanobundle: "npm:^2.0.0"
