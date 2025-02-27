@@ -1,5 +1,16 @@
 # vite-plugin-relay-lite
 
+## 0.10.0
+
+### Minor Changes
+
+- bc6faa6: Support Vite 6
+- b93f375: Ban multiple query/fragment definitions in a single tag.
+
+### Patch Changes
+
+- 3f343b8: Update magic-string
+
 ## 0.9.1
 
 ### Patch Changes
