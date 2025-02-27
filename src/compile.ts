@@ -57,6 +57,10 @@ export function compile(
       throw new Error('Unexpected empty graphql tag.');
     }
 
+    if (ast.definitions.length > 1) {
+      throw new Error('Expected exactly one definition per graphql tag');
+    }
+
     const definition = ast.definitions[0];
     if (
       definition.kind !== Kind.FRAGMENT_DEFINITION &&
