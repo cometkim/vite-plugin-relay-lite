@@ -36,7 +36,17 @@ export type PluginOptions = {
    * (Experimental) omit import statement of the `graphql` tag.
    */
   omitTagImport?: boolean,
+
+  /**
+   * (Experimental) Custom predicate function to determine that the given module path will be transformed.
+   *
+   * Default, it checks if the path isn't within the `node_modules` and `.yarn`
+   * and check if the path is within the `src` path in your Relay config.
+   */
+  shouldTransform?: SourcePredicate,
 };
+
+type SourcePredicate = (modulePath: string) => boolean;
 
 const configExplorer = cosmiconfigSync('relay', {
   searchStrategy: 'none',
@@ -76,11 +86,19 @@ export default function makePlugin(options: PluginOptions = {}): Plugin {
     }
   }
 
-  const sourceDirectory = path.resolve(cwd, (relayConfig['src'] as string) || './src').split(path.sep).join(path.posix.sep);
+  const defaultSourcePredicate: SourcePredicate = modulePath => {
+    const sourceDirectory = path.resolve(cwd, (relayConfig['src'] as string) || './src').split(path.sep).join(path.posix.sep);
+    return ( 
+      !/node_modules|\.yarn/.test(modulePath) &&
+      modulePath.startsWith(sourceDirectory)
+    );
+  };
+
   const artifactDirectory = relayConfig['artifactDirectory'];
   const codegenCommand = (relayConfig['codegenCommand'] as string) || 'relay-compiler';
   const module = options.module || ((relayConfig['eagerESModules'] || relayConfig['eagerEsModules']) ? 'esmodule' : 'commonjs');
   const omitTagImport = options.omitTagImport ?? false;
+  const shouldTransform = options.shouldTransform ?? defaultSourcePredicate;
 
   if (module !== 'esmodule') {
     console.warn(
@@ -110,11 +128,7 @@ export default function makePlugin(options: PluginOptions = {}): Plugin {
       }
     },
     transform(src, id) {
-      if (id.includes('node_modules') || id.includes('.yarn')) {
-        return;
-      }
-
-      if (!id.startsWith(sourceDirectory)) {
+      if (!shouldTransform(id)) {
         return;
       }
 
