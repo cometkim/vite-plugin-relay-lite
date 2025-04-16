@@ -44,6 +44,15 @@ export type PluginOptions = {
    * and check if the path is within the `src` path in your Relay config.
    */
   shouldTransform?: SourcePredicate,
+
+  /**
+   * (Experimental) Customize process cwd
+   *
+   * The plugin will search config, spawn codegen from the given path.
+   *
+   * Forcing it to `__dirname` or `import.meta.dirname` might help when you're working on monorepo.
+   */
+  cwd?: string,
 };
 
 type SourcePredicate = (modulePath: string) => boolean;
@@ -66,7 +75,7 @@ const configExplorer = cosmiconfigSync('relay', {
 });
 
 export default function makePlugin(options: PluginOptions = {}): Plugin {
-  const cwd = process.cwd();
+  const cwd = options.cwd ?? process.cwd();
 
   let relayConfig: AnyObject = {};
   let relayConfigPath: string | null = null;
@@ -121,6 +130,7 @@ export default function makePlugin(options: PluginOptions = {}): Plugin {
       const watch = command === 'serve' || Boolean(build.watch);
       if (willGenerate) {
         await launchProcess({
+          cwd,
           codegenCommand,
           relayConfigPath,
           watch,

@@ -2,12 +2,14 @@ import { spawn } from 'node:child_process';
 import kleur from 'kleur';
 
 type Options = {
+  cwd: string,
   codegenCommand: string,
   relayConfigPath: string | null,
   watch: boolean,
 };
 
 export async function launchProcess(options: Options): Promise<void> {
+  const cwd = options.cwd;
   const cmd = options.codegenCommand;
   const args: string[] = [];
 
@@ -20,8 +22,7 @@ export async function launchProcess(options: Options): Promise<void> {
   }
 
   const child = spawn(cmd, args, {
-    cwd: process.cwd(),
-    env: process.env,
+    cwd,
     shell: true,
     windowsHide: false,
   });
