@@ -1,5 +1,12 @@
 # vite-plugin-relay-lite
 
+## 0.11.0
+
+### Minor Changes
+
+- 1cfafb5: Add `cwd` option to allow customizing context path of the plugin.
+- e6db2f0: Add `shouldTransform` option to allow customizing which paths should be transformed.
+
 ## 0.10.0
 
 ### Minor Changes
