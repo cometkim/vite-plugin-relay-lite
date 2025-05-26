@@ -105,7 +105,7 @@ export default function makePlugin(options: PluginOptions = {}): Plugin {
 
   const artifactDirectory = relayConfig['artifactDirectory'];
   const codegenCommand = (relayConfig['codegenCommand'] as string) || 'relay-compiler';
-  const module = options.module || ((relayConfig['eagerESModules'] || relayConfig['eagerEsModules']) ? 'esmodule' : 'commonjs');
+  const module = options.module || ((relayConfig['eagerESModules'] || relayConfig['eagerEsModules']) ?? true ? 'esmodule' : 'commonjs');
   const omitTagImport = options.omitTagImport ?? false;
   const shouldTransform = options.shouldTransform ?? defaultSourcePredicate;
 
