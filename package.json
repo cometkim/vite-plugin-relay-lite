@@ -58,7 +58,7 @@
     "vite": "^6.2.0",
     "vitest": "^3.0.7"
   },
-  "packageManager": "yarn@4.9.1",
+  "packageManager": "yarn@4.9.2",
   "engines": {
     "node": ">= 18.0.0"
   }
