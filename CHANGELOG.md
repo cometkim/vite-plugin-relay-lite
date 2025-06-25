@@ -1,5 +1,11 @@
 # vite-plugin-relay-lite
 
+## 0.11.1
+
+### Patch Changes
+
+- 36c93dc: Support Vite v7+ peer dependency
+
 ## 0.11.0
 
 ### Minor Changes
