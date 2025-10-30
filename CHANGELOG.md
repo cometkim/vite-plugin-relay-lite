@@ -1,5 +1,16 @@
 # vite-plugin-relay-lite
 
+## 0.12.0
+
+### Minor Changes
+
+- e529bbb: Default to ES modules to match Relay Compiler v19 behavior
+
+### Patch Changes
+
+- 275cf8d: Setup trusted publisher and provenance for releases
+- 36c93dc: Support Vite v7+ peer dependency
+
 ## 0.11.0
 
 ### Minor Changes
