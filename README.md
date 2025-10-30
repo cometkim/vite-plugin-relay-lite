@@ -70,9 +70,10 @@ Or pass config object.
 
 ### ES Module Output
 
-Plugin respects the `eagerEsModules` option in the Relay config, so the default output format is `commonjs`.
+Plugin respects the `eagerEsModules` option in the Relay config, so the default output format is `esmodule`.
 
-However, using CommonJS in Vite projects may require additional config to transpile, and it's not recommended to use. Consider to set `eagerEsModules` to `true` in your Relay config, or set `module: 'esmodule'` in plugin options as you require.
+The plugin also supports CommonJS outputs with `eagerEsModules` set to `false` or `module: 'esmodule'` in plugin options.
+However, using CommonJS in Vite projects may require additional config to transpile, and it's not recommended to use.
 
 ### Relay Compiler Integration
 
