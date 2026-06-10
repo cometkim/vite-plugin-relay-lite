@@ -1,5 +1,11 @@
 # vite-plugin-relay-lite
 
+## 0.12.1
+
+### Patch Changes
+
+- 8dda4c6: Add package license metadata.
+
 ## 0.12.0
 
 ### Minor Changes
