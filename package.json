@@ -3,6 +3,7 @@
   "version": "0.12.0",
   "description": "Vite plugin for more convenient Relay experience",
   "homepage": "https://github.com/cometkim/vite-plugin-relay-lite",
+  "license": "MIT",
   "author": {
     "name": "Hyeseong Kim",
     "email": "hey@hyeseong.kim"
